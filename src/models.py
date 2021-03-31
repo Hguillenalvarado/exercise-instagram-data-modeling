@@ -8,23 +8,49 @@ from eralchemy import render_er
 
 Base = declarative_base()
 
-class Person(Base):
-    __tablename__ = 'person'
-    # Here we define columns for the table person
-    # Notice that each column is also a normal Python instance attribute.
-    id = Column(Integer, primary_key=True)
-    name = Column(String(250), nullable=False)
+class usuario(Base):
+    __tablename__ = 'usuario'
+    
+    id = Column(Integer, ForeignKey('seguidores.id'))
+    nombre = Column(String(250), nullable=False)
+    username = Column(String(250), nullable=False)
+    email = Column(String(250), nullable=False)
+    clave = Column(String(250), nullable=False)
 
-class Address(Base):
-    __tablename__ = 'address'
-    # Here we define columns for the table address.
-    # Notice that each column is also a normal Python instance attribute.
+
+class seguidores(Base):
+    __tablename__ = 'seguidores'
+    
     id = Column(Integer, primary_key=True)
-    street_name = Column(String(250))
-    street_number = Column(String(250))
-    post_code = Column(String(250), nullable=False)
-    person_id = Column(Integer, ForeignKey('person.id'))
-    person = relationship(Person)
+    seguidor_id = Column(Integer)
+    usuario_id = Column(Integer, ForeignKey('usuario.id'))
+
+class likes(Base):
+    __tablename__ = 'likes'
+    
+    id = Column(Integer, primary_key=True)
+    post_id = Column(Integer, ForeignKey('post.id'))
+    usuario_id = Column(Integer, ForeignKey('usuario.id'))
+
+class post(Base):
+    __tablename__ = 'likes'
+    
+    id = Column(Integer, primary_key=True)
+    usuario_id = Column(Integer, ForeignKey('usuario.id'))
+    foto= Column(String(250), nullable=False)
+    descripcion= Column(String(250), nullable=False)
+    fechacreacion=Column(String(250))
+    update=Column(String(250))
+
+class comentarios(Base):
+    __tablename__ = 'comentarios'
+    
+    id = Column(Integer, primary_key=True)
+    usuario_id = Column(Integer, ForeignKey('usuario.id'))
+    post_id = Column(Integer, ForeignKey('post.id'))
+    contenido= Column(String(250), nullable=False)
+    fechacreacion=Column(String(250))
+    update=Column(String(250))
 
     def to_dict(self):
         return {}
