@@ -41,6 +41,8 @@ class post(Base):
     descripcion= Column(String(250), nullable=False)
     fechacreacion=Column(String(250))
     update=Column(String(250))
+    foto1= Column(String(250), nullable=False)
+
 
 class comentarios(Base):
     __tablename__ = 'comentarios'
@@ -57,3 +59,4 @@ class comentarios(Base):
 
 ## Draw from SQLAlchemy base
 render_er(Base, 'diagram.png')
+
