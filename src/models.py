@@ -10,8 +10,8 @@ Base = declarative_base()
 
 class usuario(Base):
     __tablename__ = 'usuario'
-    
-    id = Column(Integer, ForeignKey('seguidores.id'))
+    id = Column(Integer, primary_key=True)
+    seguidores_id = Column(Integer, ForeignKey('seguidores.id'))
     nombre = Column(String(250), nullable=False)
     username = Column(String(250), nullable=False)
     email = Column(String(250), nullable=False)
@@ -33,7 +33,7 @@ class likes(Base):
     usuario_id = Column(Integer, ForeignKey('usuario.id'))
 
 class post(Base):
-    __tablename__ = 'likes'
+    __tablename__ = 'post'
     
     id = Column(Integer, primary_key=True)
     usuario_id = Column(Integer, ForeignKey('usuario.id'))
