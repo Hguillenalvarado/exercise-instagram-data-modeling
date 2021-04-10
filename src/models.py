@@ -57,15 +57,7 @@ class comentarios(Base):
     def to_dict(self):
         return {}
 
-class comentarios1(Base):
-    __tablename__ = 'comentarios1'
-    
-    id = Column(Integer, primary_key=True)
-    usuario_id = Column(Integer, ForeignKey('usuario.id'))
-    post_id = Column(Integer, ForeignKey('post.id'))
-    contenido= Column(String(250), nullable=False)
-    fechacreacion=Column(String(250))
-    update=Column(String(250))
+
 
     def to_dict(self):
         return {}        
